@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+{{- if eq .chezmoi.os "linux" }}
+
+{{-   if eq .chezmoi.osRelease.id "ubuntu" "debian" }}
+sudo apt install fzf ripgrep bat cargo zoxide lazygit
+
+## Option 1: Using official PPA
+#sudo add-apt-repository ppa:lazygit-team/release
+#sudo apt update
+#sudo apt install lazygit
+
+# Option 1: Using cargo
+#cargo install zoxide --locked
+
+{{-   else if eq .chezmoi.osRelease.id "almalinux" }}
+sudo dnf install fzf lazygit ripgrep zoxide bat
+{{-   end }}
+
+
+{{- else if eq .chezmoi.os "darwin" }}
+brew install fzf lazygit ripgrep zoxide bat
+{{- end }}
