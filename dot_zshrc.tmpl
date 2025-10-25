@@ -113,10 +113,23 @@ codi() {
 
 command -v fzf > /dev/null && {
     export FZF_DEFAULT_OPTS='
-    --preview="bat {}"
-    --preview-window=right:60%
-    --bind=ctrl-/:toggle-preview
-    '
+    --height 100%
+    --border
+    --bind=ctrl-/:toggle-preview'
+
+    export FZF_CTRL_T_OPTS='
+    --preview="bat --theme=zenburn --color=always --line-range :500 {}"
+    --preview-window=right:60%'
+
+    # Autocompletions
+    {{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.ID "almalinux") }}
+    source /usr/share/fzf/shell/key-bindings.zsh
+
+    {{ else if eq .chezmoi.os "darwin" }}
+    source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
+
+    {{ end }}
+
 }
 
 command -v rg > /dev/null || {
@@ -162,9 +175,6 @@ command -v eza > /dev/null && {
 ## less
 alias c='bat --theme=zenburn'
 
-## search / file explore
-alias f='fzf --preview="bat --theme=zenburn {}"'
-if [ -f ~/.fzf.zsh ]; then source ~/.fzf.zsh; fi
 
 
 #########
@@ -177,13 +187,7 @@ if [ -f '/Users/mhermose/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mhermo
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/mhermose/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mhermose/google-cloud-sdk/completion.zsh.inc'; fi
 
-# OS-specific settings
-{{ if eq .chezmoi.os "linux" }}
-# Linux-only configurations
-
-{{ else if eq .chezmoi.os "darwin" }}
-# macOS-only configurations
+{{ if eq .chezmoi.os "darwin" }}
 # disable "bell"
 printf "\e[?1042l"
-
 {{ end }}
