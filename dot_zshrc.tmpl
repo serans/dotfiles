@@ -1,3 +1,9 @@
+{{ if eq .chezmoi.os "darwin" }}
+# disable "bell"
+printf "\e[?1042l"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ end }}
+
 # History
 HISTFILE=~/.histfile
 HISTSIZE=10000000000
@@ -187,8 +193,3 @@ if [ -f '/Users/mhermose/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mhermo
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/mhermose/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mhermose/google-cloud-sdk/completion.zsh.inc'; fi
 
-{{ if eq .chezmoi.os "darwin" }}
-# disable "bell"
-printf "\e[?1042l"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-{{ end }}
