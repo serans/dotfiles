@@ -122,7 +122,7 @@ command -v fzf > /dev/null && {
     --preview-window=right:60%'
 
     # Autocompletions
-    {{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.ID "almalinux") }}
+    {{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "almalinux") }}
     source /usr/share/fzf/shell/key-bindings.zsh
 
     {{ else if eq .chezmoi.os "darwin" }}
