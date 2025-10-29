@@ -23,8 +23,14 @@ chsh -s $(which zsh)
 # UBUNTU #
 ##########
 sudo apt upgrade
-sudo apt install git tmux alacritty zsh curl i3 gnome-session lightdm
 sudo apt install fzf ripgrep bat cargo zoxide lazygit
+sudo apt install git tmux alacritty zsh curl i3 gnome-session lightdm
+
+# required for lazyvim
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install nodejs
+echo "remember to run 'Copilot auth'" inside lazyvim"
+read
 
 # Fonts
 sudo mkdir -p /usr/local/share/fonts/nerd-fonts
@@ -36,6 +42,8 @@ sudo fc-cache -fv
 snap install chezmoi --classic
 chezmoi init https://git.mich0.com/mich0/dotfiles.git
 chezmoi apply
+
+# Visual Studio Code
 
 
 {{-   else if eq .chezmoi.osRelease.id "almalinux" }}
