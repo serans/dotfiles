@@ -4,7 +4,11 @@ import = [
 ]
 
 [font]
+{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "ubuntu") }}
+size = 14
+{{ else }}
 size = 19
+{{ end }}
 normal = { family = "Inconsolata Nerd Font Mono", style = "Regular" }
 glyph_offset = { x = 0, y = 0 }
 
