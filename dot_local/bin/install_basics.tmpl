@@ -3,23 +3,52 @@
 set -e
 
 {{- if eq .chezmoi.os "linux" }}
+#################
+# LINUX GENERIC #
+#################
+
+# Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+
+# neovim
+wget -O ~/.local/bin/nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+chmod +x ~/.local/bin/nvim
+
+# Change default shell to zsh
+chsh -s $(which zsh)
+
 
 {{-   if eq .chezmoi.osRelease.id "ubuntu" "debian" }}
+##########
+# UBUNTU #
+##########
+sudo apt upgrade
+sudo apt install git tmux alacritty zsh curl i3 gnome-session lightdm
 sudo apt install fzf ripgrep bat cargo zoxide lazygit
 
-## Option 1: Using official PPA
-#sudo add-apt-repository ppa:lazygit-team/release
-#sudo apt update
-#sudo apt install lazygit
+# Fonts
+sudo mkdir -p /usr/local/share/fonts/nerd-fonts
+wget -O /tmp/InconsolataGo.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Inconsolata.zip
+sudo unzip /tmp/InconsolataGo.zip -d /usr/local/share/fonts/nerd-fonts/Inconsolata
+sudo fc-cache -fv
 
-# Option 1: Using cargo
-#cargo install zoxide --locked
+# Chezmoi
+snap install chezmoi --classic
+chezmoi init https://git.mich0.com/mich0/dotfiles.git
+chezmoi apply
+
 
 {{-   else if eq .chezmoi.osRelease.id "almalinux" }}
+#############
+# ALMALINUX #
+#############
 sudo dnf install fzf lazygit ripgrep zoxide bat
 {{-   end }}
 
 
 {{- else if eq .chezmoi.os "darwin" }}
+###########
+# MAC OSX #
+###########
 brew install fzf lazygit ripgrep zoxide bat
 {{- end }}
