@@ -116,6 +116,11 @@ codi() {
     hi NonText ctermfg=0 |\
     Codi $syntax" "$@"
 }
+{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "ubuntu") }}
+BAT_COMMAND="batcat"
+{{ else }}
+BAT_COMMAND="bat"
+{{ end }}
 
 command -v fzf > /dev/null && {
     export FZF_DEFAULT_OPTS='
@@ -124,12 +129,16 @@ command -v fzf > /dev/null && {
     --bind=ctrl-/:toggle-preview'
 
     export FZF_CTRL_T_OPTS='
-    --preview="bat --theme=zenburn --color=always --line-range :500 {}"
+    --preview="$BAT_COMMAND--theme=zenburn --color=always --line-range :500 {}"
     --preview-window=right:60%'
 
     # Autocompletions
     {{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "almalinux") }}
     source /usr/share/fzf/shell/key-bindings.zsh
+
+    {{ else if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "ubuntu") }}
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+    source /usr/share/doc/fzf/examples/completion.zsh
 
     {{ else if eq .chezmoi.os "darwin" }}
     source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
@@ -179,7 +188,7 @@ command -v eza > /dev/null && {
 }
 
 ## less
-alias c='bat --theme=zenburn'
+alias c="$BAT_COMMAND --theme=zenburn"
 
 
 
