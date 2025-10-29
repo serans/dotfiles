@@ -117,6 +117,7 @@ codi() {
     Codi $syntax" "$@"
 }
 {{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "ubuntu") }}
+export APPIMAGE_EXTRACT_AND_RUN=1
 BAT_COMMAND="batcat"
 {{ else }}
 BAT_COMMAND="bat"
