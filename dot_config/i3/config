@@ -20,6 +20,10 @@ floating_modifier $mod
 # Keyboard & mouse layout
 #exec --no-startup-id "setxkbmap -layout us -variant alt-intl"
 exec --no-startup-id "setxkbmap -layout us"
+
+# swap ctrl and cmd keys
+exec --no-startup-id setxkbmap -option ctrl:swap_lwin_lctl
+
 exec --no-startup-id xmodmap -e "pointer = 3 2 1"
 
 exec --no-startup-id nm-applet --sm-disable
