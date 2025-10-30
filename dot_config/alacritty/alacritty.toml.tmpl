@@ -15,17 +15,18 @@ glyph_offset = { x = 0, y = 0 }
 
 [keyboard]
 bindings = [
+{{ if eq .chezmoi.os "darwin" }}
 { key = "Plus",  mods = "Control", action = "IncreaseFontSize"  },
 { key = "Minus", mods = "Control", action = "DecreaseFontSize"  },
 { key = "F11",   mods = "None",    action = "ToggleFullscreen"  },
 
-{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "ubuntu") }}
+{{ else if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "ubuntu") }}
 # Ctrl+C / Ctrl+V for normal copy/paste
-{ key: C, mods: Control, action: Copy },
-{ key: V, mods: Control, action: Paste },
-
+{ key = "c", mods = "Control", action = "Copy" },
+{ key = "v", mods = "Control", action = "Paste"},
+│
 # Mod+C sends SIGTERM to the shell
-{ key: C, mods: Super, chars: "\x03" },
+{ key = "c", mods = "Super", chars = "\u0003" },
 
 {{ end }}
 ]
