@@ -1,0 +1,72 @@
+{
+    // UI
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideStatusBar": true,
+    "zenMode.hideActivityBar": true,
+    "zenMode.showTabs": "none",
+
+    "breadcrumbs.icons" : true,
+    "breadcrumbs.filePath": "last",
+    "breadcrumbs.enabled": false,
+
+    "window.customTitleBarVisibility": "windowed",
+    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.fontFamily": "Inconsolata Nerd Font Mono",
+    "terminal.integrated.fontSize": 16,
+
+    // editor settings
+    "editor.fontFamily":"JetBrains Mono NL",
+    "editor.wordWrap": "on",
+    "editor.fontSize":14,
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "editor.renderWhitespace": "trailing",
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.autoClosingOvertype": "never",
+
+    // Neovim extension settings
+    "vim.easymotion": true,
+    "vim.useSystemClipboard": true,
+    "vim.normalModeKeyBindings": [
+        {
+        "before": ["<leader>", "w"],
+        "after": ["<leader>", "<leader>", "<leader>", "b", "d", "w"]
+        },
+        {
+        "before": ["<leader>", "s"],
+        "after": ["<leader>", "<leader>", "s"]
+        }
+    ],
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+
+    "find-it-faster.general.showMaximizedTerminal": true,
+
+    // Misc
+    "github.copilot.nextEditSuggestions.enabled": true,
+
+    // LANGUAGE SPECIFIC SETTINGS
+    // --------------------------
+  
+    // XML settings
+    "[xml]": {
+        "editor.defaultFormatter": "asvetliakov.vscode-neovim"
+    },
+
+    // Python settings
+    "python.analysis.typeCheckingMode": "basic",
+    "python.terminal.activateEnvironment": false,
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultColorDecorators": "never",
+        "editor.formatOnType": true,
+        "editor.wordBasedSuggestions": "off"
+    },
+    "files.associations": {
+        "*.jinja": "jinja"
+    },
+    "workbench.activityBar.location": "hidden",
+
+}

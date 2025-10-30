@@ -1,0 +1,61 @@
+[
+    // Terminal
+    {
+        "key": "alt+m",
+        "command": "workbench.action.createTerminalEditor",
+        "when": "neovim.mode == normal && editorTextFocus && !terminalFocus"
+    },
+
+    // LazyGit
+    {
+        "key":"cmd-. g",
+        "command": "runCommands",
+        "args":
+        {
+            "commands": [
+                "workbench.action.createTerminalEditor",
+                {
+                    "command": "workbench.action.terminal.sendSequence",
+                    "args": { "text": "lazygit; exit\u000D" }
+                },
+            ]
+        },
+    },
+
+    // File Finder
+    {
+        "key": "cmd-. f",
+        "command": "find-it-faster.findFiles",
+    },
+    {
+        "key": "cmd-. t",
+        "command": "find-it-faster.findWithinFiles",
+    },
+
+    // UI Elements
+    {"key": "cmd-. 0", "command": "workbench.action.toggleZenMode"},
+    {"key": "cmd-. 1", "command" : "workbench.action.toggleActivityBarVisibility"},
+    {"key": "cmd-. 2", "command": "workbench.action.toggleSidebarVisibility"},
+    {"key": "cmd-. 3", "command" : "workbench.action.toggleAuxiliaryBar"},
+    {"key": "cmd-. 4", "command" : "workbench.action.togglePanel"},
+
+    // navigation
+    { "key": "Shift-left",       "command": "workbench.action.previousEditor",         /*"when": "!textInputFocus" */},
+    { "key": "Shift-right",      "command": "workbench.action.nextEditor",             /* "when": "!textInputFocus" */},
+    { "key": "ctrl+shift+left",  "command": "workbench.action.moveEditorLeftInGroup"},
+    { "key": "ctrl+shift+right", "command": "workbench.action.moveEditorRightInGroup"},
+
+    // when I'm navigating files with `gd` I want the files to close again if I go back with `ctrl+o`
+    // unless it's a file that I have manually opened (not a preview): that case is handled by default keybinding
+    {
+      "key": "ctrl+o",
+      "command": "runCommands",
+      "args": {
+        "commands": [
+          "workbench.action.closeActiveEditor",
+          "workbench.action.navigateBack"
+        ]
+      },
+      "when": "neovim.mode == 'normal' && !activeEditorIsNotPreview"
+    }
+]
