@@ -44,7 +44,9 @@ chezmoi init https://git.mich0.com/mich0/dotfiles.git
 chezmoi apply
 
 # Visual Studio Code
-
+wget -O /tmp/vscode.deb https://vscode.download.prss.microsoft.com/dbazure/download/stable/7d842fb85a0275a4a8e4d7e040d2625abbf7f084/code_1.105.1-1760482543_amd64.deb
+sudo apt install /tmp/vscode.deb
+rm /tmp/vscode.deb
 
 {{-   else if eq .chezmoi.osRelease.id "almalinux" }}
 #############
