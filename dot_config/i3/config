@@ -3,7 +3,6 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # To-check: rofi
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -22,7 +21,7 @@ floating_modifier $mod
 exec --no-startup-id "setxkbmap -layout us"
 
 # swap ctrl and cmd keys
-exec --no-startup-id setxkbmap -option ctrl:swap_lwin_lctl
+#exec --no-startup-id setxkbmap -option ctrl:swap_lwin_lctl
 
 exec --no-startup-id xmodmap -e "pointer = 3 2 1"
 

@@ -17,6 +17,9 @@ chmod +x ~/.local/bin/nvim
 # Change default shell to zsh
 chsh -s $(which zsh)
 
+# Rust and cargo
+#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 
 {{-   if eq .chezmoi.osRelease.id "ubuntu" "debian" }}
 ##########
@@ -25,6 +28,23 @@ chsh -s $(which zsh)
 sudo apt upgrade
 sudo apt install fzf ripgrep bat cargo zoxide lazygit
 sudo apt install git tmux alacritty zsh curl i3 gnome-session lightdm rofi
+
+###################
+# keyboard mappings
+cargo install kanata
+sudo groupadd uinput
+sudo usermod -aG input $USER
+sudo usermod -aG uinput $USER
+echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' | \
+    sudo tee /etc/udev/rules.d/99-kanata.rules > /dev/null
+# Reload udev rules
+sudo udevadm control --reload-rules
+# Trigger udev to apply the new rule
+sudo udevadm trigger
+####################
+
+# Load the uinput kernel module (it may already be loaded)
+sudo modprobe uinput
 
 # required for lazyvim
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -

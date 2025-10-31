@@ -1,0 +1,19 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  lmet c v a
+)
+
+(defalias
+  met (layer-while-held mods)
+)
+
+(deflayer base
+  @met c v a
+)
+
+(deflayer mods
+  _ C-c C-v C-a
+)
