@@ -1,0 +1,7 @@
+keymap:
+  - name: Remap M-c to C-c
+    remap:
+      Super-c: C-c
+      Super-v: C-v
+      Super-a: C-a
+      C-c: C-Shift-c

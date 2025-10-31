@@ -30,8 +30,8 @@ sudo apt install fzf ripgrep bat cargo zoxide lazygit
 sudo apt install git tmux alacritty zsh curl i3 gnome-session lightdm rofi
 
 ###################
-# keyboard mappings
-cargo install kanata
+cargo install xremap --features x11
+
 sudo groupadd uinput
 sudo usermod -aG input $USER
 sudo usermod -aG uinput $USER
@@ -41,7 +41,10 @@ echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinpu
 sudo udevadm control --reload-rules
 # Trigger udev to apply the new rule
 sudo udevadm trigger
-####################
+
+systemctl --user daemon-reload
+systemctl --user enable xremap.service
+##################
 
 # Load the uinput kernel module (it may already be loaded)
 sudo modprobe uinput

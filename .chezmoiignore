@@ -4,4 +4,8 @@ Library
 
 {{ if eq .chezmoi.os "darwin" }}
 .config/Code
+.config/xremap
+.config/i3
+.config/i3status
+.config/systemd
 {{ end }}
