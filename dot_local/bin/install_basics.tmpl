@@ -25,11 +25,18 @@ chsh -s $(which zsh)
 ##########
 # UBUNTU #
 ##########
+
+## Chezmoi
+## Of course chezmoi has to be installed already, but this is where I document how
+# snap install chezmoi --classic
+# chezmoi init https://git.mich0.com/mich0/dotfiles.git
+# chezmoi apply
+
 sudo apt upgrade
 sudo apt install fzf ripgrep bat cargo zoxide lazygit
 sudo apt install git tmux alacritty zsh curl i3 gnome-session lightdm rofi
 
-###################
+#----------- XRemap -------------
 cargo install xremap --features x11
 
 sudo groupadd uinput
@@ -41,13 +48,12 @@ echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinpu
 sudo udevadm control --reload-rules
 # Trigger udev to apply the new rule
 sudo udevadm trigger
+# Load the uinput kernel module (it may already be loaded)
+sudo modprobe uinput
 
 systemctl --user daemon-reload
 systemctl --user enable xremap.service
-##################
-
-# Load the uinput kernel module (it may already be loaded)
-sudo modprobe uinput
+#--------------------------------
 
 # required for lazyvim
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
@@ -60,11 +66,6 @@ sudo mkdir -p /usr/local/share/fonts/nerd-fonts
 wget -O /tmp/InconsolataGo.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Inconsolata.zip
 sudo unzip /tmp/InconsolataGo.zip -d /usr/local/share/fonts/nerd-fonts/Inconsolata
 sudo fc-cache -fv
-
-# Chezmoi
-snap install chezmoi --classic
-chezmoi init https://git.mich0.com/mich0/dotfiles.git
-chezmoi apply
 
 # Visual Studio Code
 wget -O /tmp/vscode.deb https://vscode.download.prss.microsoft.com/dbazure/download/stable/7d842fb85a0275a4a8e4d7e040d2625abbf7f084/code_1.105.1-1760482543_amd64.deb
