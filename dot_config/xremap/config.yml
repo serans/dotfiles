@@ -5,3 +5,4 @@ keymap:
       Super-v: C-v
       Super-a: C-a
       C-c: C-Shift-c
+      C-v: C-Shift-v

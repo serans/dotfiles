@@ -27,6 +27,9 @@ bindings = [
 
 # Mod+C sends SIGTERM to the shell
 { key = "c", mods = "Shift|Control", chars = "\u0003" },
+# Sends C-v to shell (for vim visual mode)
+# C-v -> mapped by xremap to: C-S-v -> mapped by alacritty to: C-v
+{ key = "v", mods = "Shift|Control", chars = "\u0016" },
 
 {{ end }}
 ]
