@@ -72,6 +72,18 @@ wget -O /tmp/vscode.deb https://vscode.download.prss.microsoft.com/dbazure/downl
 sudo apt install /tmp/vscode.deb
 rm /tmp/vscode.deb
 
+# Dropbox
+wget -O /tmp/dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2025.05.20_amd64.deb"
+sudo apt install /tmp/dropbox.deb
+rm /tmp/dropbox.deb
+
+# Obsidian
+wget -O /tmp/obsidian.deb "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.9.14/obsidian_1.9.14_amd64.deb"
+sudo apt install /tmp/obsidian.deb
+rm /tmp/obsidian.deb
+
+{{-   else if eq .chezmoi.osRelease.id "fedora" }}
+
 {{-   else if eq .chezmoi.osRelease.id "almalinux" }}
 #############
 # ALMALINUX #
