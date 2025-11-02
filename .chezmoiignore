@@ -3,7 +3,7 @@ Library
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
-**rofi/**
+.local/share/rofi
 .config/Code
 .config/xremap
 .config/i3
