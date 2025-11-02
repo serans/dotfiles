@@ -31,16 +31,8 @@ rofi_menu() {
     fi
 }
 
-#menu2(){
-#  rofi_menu "Second Level" \
-#    "1" "say hello" "echo 'hello'" \
-#    "0" "go back" "layout_menu"
-#}
-
-# Usage:
 layout_menu() {
   rofi_menu "Layout" \
-#      "0" "menu 2" "menu2"
       "a" "layout: split (default)" "i3-msg layout toggle split" \
       "s" "layout: stack" "i3-msg layout stack" \
       "d" "layout: tabs" "i3-msg layout tabs" \
