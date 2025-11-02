@@ -1,42 +1,55 @@
 #!/bin/bash
 
+rofi_menu() {
+    local title="$1"
+    shift
+    local -a items=()
+    local -a keys=()
+    local -a commands=()
 
-# Show options in a transparent terminal overlay
-menu="
-a) layout: split (default)
-s) layout: stack
-d) layout: tabs
-f) fullscreen toggle
-h) split: horizontal
-v) split: vertical
-space) toggle floating window
-n) display: move to left
-m) display: move to right
-"
+    while [[ $# -gt 0 ]]; do
+        keys+=("$1")
+        items+=("$1) $2")
+        commands+=("$3")
+        shift 3
+    done
 
-echo -e "$menu" | \
-  rofi -dmenu -theme Monokai -no-custom -format 'i' -p "Layout" \
-  -kb-custom-1 "a" \
-  -kb-custom-2 "s" \
-  -kb-custom-3 "d" \
-  -kb-custom-4 "f" \
-  -kb-custom-5 "h" \
-  -kb-custom-6 "v" \
-  -kb-custom-7 "space" \
-  -kb-custom-8 "n" \
-  -kb-custom-9 "m" \
+    # Build keybindings
+    local kb_args=()
+    for i in "${!keys[@]}"; do
+        kb_args+=("-kb-custom-$((i+1))" "${keys[$i]}")
+    done
 
-exit_code=$?
+    printf '%s\n' "${items[@]}" | \
+        rofi -dmenu -theme Monokai -no-custom -format 'i' -p "$title" "${kb_args[@]}"
 
-case $exit_code in
-  10) i3-msg layout toggle split ;;
-  11) i3-msg layout stack;;
-  12) i3-msg layout tabs;;
-  13) i3-msg fullscreen toggle ;;
-  14) i3-msg split h ;;
-  15) i3-msg split v ;;
-  16) i3-msg floating toggle ;;
-  17) i3-msg move workspace to output left ;;
-  18) i3-msg move workspace to output right ;;
-  *) echo "Exit code: $exit_code" ;;
-esac
+    exit_code=$?
+    idx=$((exit_code - 10))
+
+    if [[ $idx -ge 0 && $idx -lt ${#commands[@]} ]]; then
+        eval "${commands[$idx]}"
+    fi
+}
+
+#menu2(){
+#  rofi_menu "Second Level" \
+#    "1" "say hello" "echo 'hello'" \
+#    "0" "go back" "layout_menu"
+#}
+
+# Usage:
+layout_menu() {
+  rofi_menu "Layout" \
+#      "0" "menu 2" "menu2"
+      "a" "layout: split (default)" "i3-msg layout toggle split" \
+      "s" "layout: stack" "i3-msg layout stack" \
+      "d" "layout: tabs" "i3-msg layout tabs" \
+      "f" "fullscreen toggle" "i3-msg fullscreen toggle" \
+      "h" "split: horizontal" "i3-msg split h" \
+      "v" "split: vertical" "i3-msg split v" \
+      "space" "toggle floating window" "i3-msg floating toggle" \
+      "n" "display: move to left" "i3-msg move workspace to output left" \
+      "m" "display: move to right" "i3-msg move workspace to output right"
+}
+
+layout_menu
